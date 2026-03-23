@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bespoke-coauthor"
+version = "0.1.0"
+description = "Open-source code authorship analysis -- who wrote what, structural impact, team dynamics"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+authors = [{name = "BespokeAgile"}]
+keywords = ["authorship", "attribution", "git", "code-analysis", "team-dynamics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Software Development :: Quality Assurance",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+web = ["fastapi>=0.100.0", "uvicorn[standard]>=0.20.0"]
+semantic = ["anthropic>=0.18.0"]
+mcp = ["mcp>=1.26.0"]
+all = ["bespoke-coauthor[web,semantic,mcp]"]
+
+[project.scripts]
+bespoke-coauthor = "coauthor.__main__:main"
+
+[tool.setuptools]
+packages = ["coauthor"]
+package-dir = {"coauthor" = "coauthor"}
