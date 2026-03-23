@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BespokeAgile Coauthor</title>
+    <link rel="stylesheet" href="/dashboard/style.css">
+    <link rel="stylesheet" href="/dashboard/alice.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <nav class="sidebar" role="navigation" aria-label="Main navigation">
+            <div class="sidebar-header">
+                <h1 class="logo">Coauthor</h1>
+                <span class="version" id="version-badge">v0.1.0</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#/home" class="nav-link active" data-route="home">Home</a></li>
+                <li><a href="#/scan" class="nav-link" data-route="scan">Scan</a></li>
+                <li><a href="#/authors" class="nav-link" data-route="authors">Authors</a></li>
+                <li><a href="#/impact" class="nav-link" data-route="impact">Impact</a></li>
+                <li><a href="#/history" class="nav-link" data-route="history">History</a></li>
+                <li><a href="#/settings" class="nav-link" data-route="settings">Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <span class="sidebar-brand">BespokeAgile</span>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="content-area">
+            <main class="content" id="app" role="main">
+                <div class="loading">Loading...</div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Alice conversation panel (hidden by default; shown when LLM key is configured) -->
+    <div id="alice-panel" class="alice-panel" style="display:none">
+        <div class="alice-panel-header" onclick="App.toggleAlice()">
+            <span class="alice-panel-title">Alice</span>
+            <span class="alice-panel-status" id="alice-status">Ready</span>
+            <span class="alice-panel-toggle" id="alice-toggle-icon">&#9650;</span>
+        </div>
+        <div class="alice-panel-body" id="alice-panel-body">
+            <div class="alice-messages" id="alice-messages"></div>
+            <div class="alice-shortcuts">
+                <button class="alice-shortcut" onclick="App.aliceShortcut('Who owns this code?')">Who owns this code?</button>
+                <button class="alice-shortcut" onclick="App.aliceShortcut('Show team dynamics')">Show team dynamics</button>
+                <button class="alice-shortcut" onclick="App.aliceShortcut('What changed recently?')">What changed recently?</button>
+                <button class="alice-shortcut" onclick="App.aliceShortcut('Bus factor risk?')">Bus factor risk?</button>
+            </div>
+            <div class="alice-input-row">
+                <input class="alice-input" id="alice-input" placeholder="Ask Alice about code authorship..." onkeydown="if(event.key==='Enter')App.sendToAlice()">
+                <button class="alice-send" onclick="App.sendToAlice()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core scripts -->
+    <script src="/dashboard/router.js"></script>
+    <script src="/dashboard/api.js"></script>
+    <script src="/dashboard/components.js"></script>
+    <!-- View scripts -->
+    <script defer src="/dashboard/views/home.js"></script>
+    <script defer src="/dashboard/views/scan.js"></script>
+    <script defer src="/dashboard/views/authors.js"></script>
+    <script defer src="/dashboard/views/impact.js"></script>
+    <script defer src="/dashboard/views/history.js"></script>
+    <script defer src="/dashboard/views/settings.js"></script>
+    <!-- Alice conversation panel -->
+    <script defer src="/dashboard/alice.js"></script>
+    <!-- App init (last) -->
+    <script defer src="/dashboard/app.js"></script>
+</body>
+</html>

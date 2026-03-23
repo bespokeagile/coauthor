@@ -6,6 +6,7 @@ Usage:
     bespoke-coauthor impacts [scan_id]
     bespoke-coauthor history
     bespoke-coauthor serve [--port PORT] [--host HOST]
+    bespoke-coauthor mcp
     bespoke-coauthor version
 """
 
@@ -172,6 +173,13 @@ def _cmd_serve(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_mcp(args: argparse.Namespace) -> int:
+    """Start the MCP server (stdio transport)."""
+    from .mcp_server import run_mcp_server
+    run_mcp_server()
+    return 0
+
+
 def _cmd_version(args: argparse.Namespace) -> int:
     """Show version."""
     print("bespoke-coauthor %s" % __version__)
@@ -233,6 +241,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         help="Host to bind to (default: 127.0.0.1)",
     )
 
+    # mcp
+    subparsers.add_parser("mcp", help="Start MCP server (stdio transport)")
+
     # version
     subparsers.add_parser("version", help="Show version")
 
@@ -248,6 +259,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "impacts": _cmd_impacts,
         "history": _cmd_history,
         "serve": _cmd_serve,
+        "mcp": _cmd_mcp,
         "version": _cmd_version,
     }
 
